@@ -1,0 +1,33 @@
+﻿@model IndexViewModel[]
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <TITLE>Tree Example</TITLE>
+    <link rel="stylesheet" href="~/css/three.css" type="text/css" />
+    <script src="~/jquery/jquery.js"></script>
+    <script src="~/js/three.js"></script>
+    <script>
+        onload = function () { tree("tree", "/api/ajax") }
+    </script>
+</head>
+<body>
+    Наше дерево:
+    <ul class="Container" id="tree">
+        @{
+            for (int i = 0; i < Model.Length; i++)
+            {
+                @:<li class="Node IsRoot ExpandClosed @((i == Model.Length - 1)?"IsLast":"")" data-params=@Model[i].Params data-method="@Model[i].Method">
+                <div class="Expand"></div>
+                <div class="Content">@Model[i].Name</div>
+                <ul class="Container">
+                </ul>
+                @:</li>
+            }
+        }
+    </ul>
+</body>
+</html>
+
+
+
